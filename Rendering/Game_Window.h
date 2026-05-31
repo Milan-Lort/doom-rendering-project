@@ -3,8 +3,11 @@
 
 #include <SDL3/SDL.h>
 #include <SDL3/SDL_main.h>
+#include <string>
 
-namespace rendering {
+using namespace std;
+
+//namespace rendering {
 
 class Game_Window {
     private:
@@ -13,9 +16,9 @@ class Game_Window {
     SDL_Window* window;
     SDL_Renderer* renderer;
 
-    Game_Window();
+    Game_Window(const char* title, int width, int height);
 };
 
-}
+//}
 
 #endif
