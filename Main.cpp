@@ -3,9 +3,8 @@
 #include <iostream>
 
 #include "Rendering/Game_Window.h"
-#include "Rendering/Game_Window.cpp"
 
-//using namespace rendering;
+using namespace rendering;
 
 int main() {
     // initialize SDL
@@ -16,6 +15,7 @@ int main() {
 
     // create a window
     Game_Window mainWindow("Main Window", 500, 500);
+    mainWindow.Draw_Blank_Screen();
 
     SDL_Delay(5000);
 

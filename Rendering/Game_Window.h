@@ -7,18 +7,22 @@
 
 using namespace std;
 
-//namespace rendering {
+namespace rendering {
 
 class Game_Window {
     private:
+    int winWidth;
+    int winHeight;
 
     public:
     SDL_Window* window;
     SDL_Renderer* renderer;
 
     Game_Window(const char* title, int width, int height);
+
+    void Draw_Blank_Screen();
 };
 
-//}
+}
 
 #endif
