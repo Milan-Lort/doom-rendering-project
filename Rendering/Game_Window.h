@@ -16,7 +16,7 @@ class Game_Window {
 
     SDL_Renderer* renderer;
     SDL_Surface* surf;
-    SDL_Texture* texture;
+    SDL_Surface* winSurf;
 
     public:
     SDL_Window* window;

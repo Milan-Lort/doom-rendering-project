@@ -9,19 +9,15 @@ Game_Window::Game_Window(const char* title, int width, int height) {
     winWidth = width;
     winHeight= height;
     window = SDL_CreateWindow(title, width, height, 0);
-    // add error handling later
-    renderer = SDL_CreateRenderer(window, NULL);
     // add errror handling later
     surf = SDL_CreateSurface(width, height, SDL_PIXELFORMAT_ARGB32);
-
-    texture = SDL_CreateTextureFromSurface(renderer, surf);
+    surf = SDL_GetWindowSurface(window);
 }
 
 void Game_Window::Draw_Blank_Screen() {
+    SDL_BlitSurface(surf, NULL, winSurf, NULL);
 
-    SDL_RenderClear(renderer);
-    SDL_RenderTexture(renderer, texture, NULL, NULL);
-    SDL_RenderPresent(renderer);
+    SDL_UpdateWindowSurface(window);
 }
 
 void Game_Window::Draw_Point(int x, int y, Uint32 colour) {
@@ -33,7 +29,7 @@ void Game_Window::Draw_Point(int x, int y, Uint32 colour) {
     pixel = pixel + (y * surf->pitch) + (x * bytes);
     *(Uint32*) pixel = colour;
 
-    SDL_RenderClear(renderer);
-    SDL_RenderTexture(renderer, texture, NULL, NULL);
-    SDL_RenderPresent(renderer);
+    SDL_BlitSurface(surf, NULL, winSurf, NULL);
+
+    SDL_UpdateWindowSurface(window);
 }
