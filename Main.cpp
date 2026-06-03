@@ -17,11 +17,7 @@ int main() {
     Game_Window mainWindow("Main Window", 500, 500);
     mainWindow.Draw_Blank_Screen();
 
-    for (int i = 0; i < 250; i++) {
-        for (int j = 0; j < 250; j++) {
-            mainWindow.Draw_Point(j, i, SDL_MapRGBA(SDL_GetPixelFormatDetails(SDL_PIXELFORMAT_ARGB32), NULL, 100, 100, 100, 100));
-        }
-    }
+    mainWindow.Draw_Rectangle(0, 0, 255, 255, SDL_MapRGBA(SDL_GetPixelFormatDetails(SDL_PIXELFORMAT_ARGB32), NULL, 50, 255, 100, 100));
 
     SDL_Delay(5000);
 

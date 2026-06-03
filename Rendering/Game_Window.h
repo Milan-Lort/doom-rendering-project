@@ -26,6 +26,8 @@ class Game_Window {
     void Draw_Blank_Screen();
 
     void Draw_Point(int x, int y, Uint32 colour);
+
+    void Draw_Rectangle(int x1, int y1, int x2, int y2, Uint32 colour);
 };
 
 }
