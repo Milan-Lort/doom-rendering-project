@@ -3,8 +3,10 @@
 #include <iostream>
 
 #include "Rendering/Game_Window.h"
+#include "Player/Player.h"
 
 using namespace rendering;
+using namespace player;
 
 int main() {
     // initialize SDL
@@ -15,9 +17,14 @@ int main() {
 
     // create a window
     Game_Window mainWindow("Main Window", 500, 500);
-    mainWindow.Draw_Blank_Screen();
 
-    mainWindow.Draw_Rectangle(0, 0, 255, 255, SDL_MapRGBA(SDL_GetPixelFormatDetails(SDL_PIXELFORMAT_ARGB32), NULL, 50, 255, 100, 100));
+    // create a player
+    Player player;
+
+    Uint32 testColour = SDL_MapRGBA(SDL_GetPixelFormatDetails(SDL_PIXELFORMAT_ARGB32), NULL, 0, 0, 0, 100);
+
+    mainWindow.Draw_Rectangle(0, 0, 500, 500, testColour);
+
 
     SDL_Delay(5000);
 
