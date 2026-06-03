@@ -14,13 +14,18 @@ class Game_Window {
     int winWidth;
     int winHeight;
 
+    SDL_Renderer* renderer;
+    SDL_Surface* surf;
+    SDL_Texture* texture;
+
     public:
     SDL_Window* window;
-    SDL_Renderer* renderer;
 
     Game_Window(const char* title, int width, int height);
 
     void Draw_Blank_Screen();
+
+    void Draw_Point(int x, int y, Uint32 colour);
 };
 
 }
