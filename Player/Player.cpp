@@ -6,14 +6,9 @@
 using namespace player;
 
 Player::Player() {
-    position[0] = 0;
-    position[1] = 0;
-
-    faceDir[0] = 1;
-    faceDir[1] = 0;
-
-    movDir[0] = 0;
-    movDir[1] = 0;
+    xPos = 0;
+    yPos = 0;
+    rotation = 0;
 
     velocity = 0;
 }
@@ -23,8 +18,17 @@ void Player::Handle_Input() {
 
     SDL_PumpEvents();
 
-    if (key_states[SDL_SCANCODE_W]) {position[0] += 1;}
-    if (key_states[SDL_SCANCODE_S]) {position[0] -= 1;}
+    if (key_states[SDL_SCANCODE_W]) {yPos += 1;}
+    if (key_states[SDL_SCANCODE_S]) {yPos -= 1;}
 
-    std::cout<<position[0]<<std::endl;
+    if (key_states[SDL_SCANCODE_D]) {xPos += 1;}
+    if (key_states[SDL_SCANCODE_A]) {xPos -= 1;}
+}
+
+int Player::Get_xPos() {
+    return xPos;
+}
+
+int Player::Get_yPos() {
+    return yPos;
 }

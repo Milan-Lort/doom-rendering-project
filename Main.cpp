@@ -5,6 +5,9 @@
 #include "Rendering/Game_Window.h"
 #include "Player/Player.h"
 
+#define SCREEN_WIDTH 800
+#define SCREEN_HEIGHT 600
+
 using namespace rendering;
 using namespace player;
 
@@ -16,14 +19,23 @@ int main() {
     } // for now only video is initialized, need to initialize more as we add functionality
 
     // create a window
-    Game_Window mainWindow("Main Window", 500, 500);
-
+    Game_Window mainWindow("Main Window", SCREEN_WIDTH, SCREEN_HEIGHT);
+    
     // create a player
     Player player;
-
-    Uint32 testColour = SDL_MapRGBA(SDL_GetPixelFormatDetails(SDL_PIXELFORMAT_ARGB32), NULL, 0, 0, 0, 100);
-
-    mainWindow.Draw_Rectangle(0, 0, 500, 500, testColour);
+    
+    Uint32 testColour = SDL_MapRGBA(SDL_GetPixelFormatDetails(SDL_PIXELFORMAT_ARGB32), NULL, 255, 0, 0, 100);
+    Uint32 testColour2 = SDL_MapRGBA(SDL_GetPixelFormatDetails(SDL_PIXELFORMAT_ARGB32), NULL, 0, 0, 255, 100);
+    
+    mainWindow.Draw_Rectangle(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, testColour);
+    
+    while(true) {
+        player.Handle_Input();
+        
+        // mainWindow.Clear_Surf(testColour);
+        std::cout<<"Does it reach here?"<<std::endl;
+        mainWindow.Draw_Rectangle(0, 0, 250 + player.Get_xPos(), 250 + player.Get_yPos(), testColour2);
+    }
 
 
     SDL_Delay(5000);

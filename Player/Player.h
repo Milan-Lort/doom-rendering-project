@@ -8,17 +8,21 @@ namespace player {
     class Player {
         private:
         int velocity;
-        int movDir[2];
+        int xPos, yPos;
+
+        float rotation;
 
         const bool *key_states = SDL_GetKeyboardState(NULL);
         
         public:
-        int position[2];
-        int faceDir[2];
 
         Player();
         
         void Handle_Input();
+
+        int Get_xPos();
+
+        int Get_yPos();
     };
 }
 

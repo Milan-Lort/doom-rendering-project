@@ -23,11 +23,9 @@ class Game_Window {
 
     Game_Window(const char* title, int width, int height);
 
-    void Draw_Blank_Screen();
-
-    void Draw_Point(int x, int y, Uint32 colour);
-
     void Draw_Rectangle(int x1, int y1, int x2, int y2, Uint32 colour);
+
+    void Clear_Surf(Uint32 colour);
 };
 
 }
