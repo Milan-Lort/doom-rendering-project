@@ -32,9 +32,8 @@ int main() {
     while(true) {
         player.Handle_Input();
         
-        // mainWindow.Clear_Surf(testColour);
-        std::cout<<"Does it reach here?"<<std::endl;
-        mainWindow.Draw_Rectangle(0, 0, 250 + player.Get_xPos(), 250 + player.Get_yPos(), testColour2);
+        mainWindow.Clear_Surf(testColour);
+        mainWindow.Draw_Rectangle(player.Get_xPos(), player.Get_yPos() , 50 + player.Get_xPos(), 50 + player.Get_yPos(), testColour2);
     }
 
 

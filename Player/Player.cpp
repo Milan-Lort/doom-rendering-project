@@ -18,8 +18,8 @@ void Player::Handle_Input() {
 
     SDL_PumpEvents();
 
-    if (key_states[SDL_SCANCODE_W]) {yPos += 1;}
-    if (key_states[SDL_SCANCODE_S]) {yPos -= 1;}
+    if (key_states[SDL_SCANCODE_W]) {yPos -= 1;}
+    if (key_states[SDL_SCANCODE_S]) {yPos += 1;}
 
     if (key_states[SDL_SCANCODE_D]) {xPos += 1;}
     if (key_states[SDL_SCANCODE_A]) {xPos -= 1;}

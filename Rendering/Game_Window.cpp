@@ -22,6 +22,10 @@ void Game_Window::Draw_Rectangle(int x1, int y1, int x2, int y2, Uint32 colour) 
     if (x2 >= winWidth) {x2 = winWidth - 1;}
     if (y2 >= winHeight) {y2 = winHeight - 1;}
 
+    if (x1 < 0 || x1 >= winWidth) return;
+    if (y1 < 0 || y1 >= winHeight) return;
+
+
     for (int y = y1; y <= y2; y++) {
         for (int x = x1; x <= x2; x++) {
             Uint32* pixel = (Uint32*)(startPx + (y * surf->pitch) + (x * bytes));
@@ -37,8 +41,8 @@ void Game_Window::Clear_Surf(Uint32 colour) {
     int bytes = sizeof(Uint32);
     Uint8* startPx = ((Uint8*)surf->pixels);
 
-    for (int y = 0; y <= winHeight; y++) {
-        for (int x = 0; x <= winWidth; x++) {
+    for (int y = 0; y < winHeight; y++) {
+        for (int x = 0; x < winWidth; x++) {
             Uint32* pixel = (Uint32*)(startPx + (y * surf->pitch) + (x * bytes));
             *pixel = colour;
         }
