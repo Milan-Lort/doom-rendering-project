@@ -1,6 +1,8 @@
 #include <string>
 #include "Game_Window.h"
 
+#include "../Types/Types.h"
+
 using namespace std;
 using namespace rendering;
 
@@ -47,4 +49,45 @@ void Game_Window::Clear_Surf(Uint32 colour) {
             *pixel = colour;
         }
     }
+}
+
+void Game_Window::Set_Px(int x, int y, Uint32 colour) {
+    Uint32* pixel = (Uint32*)((Uint8*)surf->pixels + (y * surf->pitch) + (x * 4)); // is the number of bytes in a 32 bit unsigned integer
+    *pixel = colour;
+}
+
+void Game_Window::Draw_Line(Vec2 p1, Vec2 p2, Uint32 colour) {
+    int dx, dy;
+
+    if (p1.x < p2.x) {dx = p2.x - p1.x;}
+    else {dx = p1.x - p2.x;}
+
+    if (p1.y < p2.y) {dy = p2.y - p1.y;}
+    else {dy = p1.y - p2.y;}
+
+    int dirX = p1.x < p2.x ? 1 : -1;
+    int dirY = p1.y < p2.y ? 1 : -1;
+
+    int err = (dy < dx ? dx : -dy)/2;
+    int e2;
+
+    while (true) {
+        this->Set_Px(p1.x, p1.y, colour);
+        if (p1.x == p2.x && p1.y == p2.y) break;
+
+        // calculate the new iteration of pixel positions
+        // look more into how this works exactly
+        e2 = err;
+        if (e2 > -dx) {
+            err -= dy;
+            p1.x += dirX;
+        }
+        if (e2 < dy) {
+            err += dx;
+            p1.y += dirY;
+        }
+    }
+
+    SDL_BlitSurface(surf, NULL, winSurf, NULL);
+    SDL_UpdateWindowSurface(window);
 }

@@ -5,8 +5,8 @@
 #include "Rendering/Game_Window.h"
 #include "Player/Player.h"
 
-#define SCREEN_WIDTH 800
-#define SCREEN_HEIGHT 600
+#define SCREEN_WIDTH 400
+#define SCREEN_HEIGHT 300
 
 using namespace rendering;
 using namespace player;
@@ -24,7 +24,7 @@ int main() {
     // create a player
     Player player;
     
-    Uint32 testColour = SDL_MapRGBA(SDL_GetPixelFormatDetails(SDL_PIXELFORMAT_ARGB32), NULL, 255, 0, 0, 100);
+    Uint32 testColour = SDL_MapRGBA(SDL_GetPixelFormatDetails(SDL_PIXELFORMAT_ARGB32), NULL, 0, 0, 0, 100);
     Uint32 testColour2 = SDL_MapRGBA(SDL_GetPixelFormatDetails(SDL_PIXELFORMAT_ARGB32), NULL, 0, 0, 255, 100);
     
     mainWindow.Draw_Rectangle(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, testColour);
@@ -33,7 +33,13 @@ int main() {
         player.Handle_Input();
         
         mainWindow.Clear_Surf(testColour);
-        mainWindow.Draw_Rectangle(player.Get_xPos(), player.Get_yPos() , 50 + player.Get_xPos(), 50 + player.Get_yPos(), testColour2);
+        Vec2 p1;
+        p1.x = 0;
+        p1.y = 0;
+        Vec2 p2;
+        p2.x = player.Get_xPos();
+        p2.y = player.Get_yPos();
+        mainWindow.Draw_Line(p1, p2, testColour2);
     }
 
 

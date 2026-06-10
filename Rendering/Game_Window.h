@@ -5,6 +5,8 @@
 #include <SDL3/SDL_main.h>
 #include <string>
 
+#include "../Types/Types.h"
+
 using namespace std;
 
 namespace rendering {
@@ -24,6 +26,10 @@ class Game_Window {
     Game_Window(const char* title, int width, int height);
 
     void Draw_Rectangle(int x1, int y1, int x2, int y2, Uint32 colour);
+
+    void Set_Px(int x, int y, Uint32 colour);
+
+    void Draw_Line(Vec2 p1, Vec2 p2, Uint32 colour);
 
     void Clear_Surf(Uint32 colour);
 };
