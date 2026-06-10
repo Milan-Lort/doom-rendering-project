@@ -37,8 +37,8 @@ int main() {
         p1.x = 0;
         p1.y = 0;
         Vec2 p2;
-        p2.x = player.Get_xPos();
-        p2.y = player.Get_yPos();
+        p2.x = (int)player.Get_xPos();
+        p2.y = (int)player.Get_yPos();
         mainWindow.Draw_Line(p1, p2, testColour2);
     }
 

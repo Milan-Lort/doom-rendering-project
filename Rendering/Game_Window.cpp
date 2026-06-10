@@ -52,6 +52,8 @@ void Game_Window::Clear_Surf(Uint32 colour) {
 }
 
 void Game_Window::Set_Px(int x, int y, Uint32 colour) {
+    if (x < 0 || x >= winWidth) return;
+    else if (y < 0 || y >= winHeight) return;
     Uint32* pixel = (Uint32*)((Uint8*)surf->pixels + (y * surf->pitch) + (x * 4)); // is the number of bytes in a 32 bit unsigned integer
     *pixel = colour;
 }

@@ -19,6 +19,8 @@ class Game_Window {
     SDL_Renderer* renderer;
     SDL_Surface* surf;
     SDL_Surface* winSurf;
+    
+    void Set_Px(int x, int y, Uint32 colour);
 
     public:
     SDL_Window* window;
@@ -27,7 +29,6 @@ class Game_Window {
 
     void Draw_Rectangle(int x1, int y1, int x2, int y2, Uint32 colour);
 
-    void Set_Px(int x, int y, Uint32 colour);
 
     void Draw_Line(Vec2 p1, Vec2 p2, Uint32 colour);
 

@@ -3,14 +3,16 @@
 
 #include <SDL3/SDL_keyboard.h>
 
+#include "../Types/Types.h"
+
 namespace player {
     // go over all of this later after seeing how others deal with some of these things
     class Player {
         private:
-        int velocity;
-        int xPos, yPos;
-
+        FltVec2 pos;
+        
         float rotation;
+        float velocity;
 
         const bool *key_states = SDL_GetKeyboardState(NULL);
         
@@ -20,9 +22,9 @@ namespace player {
         
         void Handle_Input();
 
-        int Get_xPos();
+        float Get_xPos();
 
-        int Get_yPos();
+        float Get_yPos();
     };
 }
 
