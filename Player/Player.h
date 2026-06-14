@@ -9,10 +9,13 @@ namespace player {
     // go over all of this later after seeing how others deal with some of these things
     class Player {
         private:
+        // Position should be arbitrary world space not screen space
         FltVec2 pos;
         
-        float rotation;
         float velocity;
+
+        float rotation;
+        float rotSpeed;
 
         const bool *key_states = SDL_GetKeyboardState(NULL);
         
@@ -20,11 +23,13 @@ namespace player {
 
         Player();
         
-        void Handle_Input();
+        bool Handle_Input();
 
         float Get_xPos();
 
         float Get_yPos();
+
+        float Get_Rot();
     };
 }
 
