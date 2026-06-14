@@ -32,6 +32,7 @@ int main() {
     
     Uint32 testColour = SDL_MapRGBA(SDL_GetPixelFormatDetails(SDL_PIXELFORMAT_ARGB32), NULL, 0, 0, 0, 100);
     Uint32 testColour2 = SDL_MapRGBA(SDL_GetPixelFormatDetails(SDL_PIXELFORMAT_ARGB32), NULL, 0, 0, 255, 100);
+    Uint32 testColour3 = SDL_MapRGBA(SDL_GetPixelFormatDetails(SDL_PIXELFORMAT_ARGB32), NULL, 255, 0, 0, 100);
     
     mainWindow.Draw_Rectangle(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, testColour); // set the window to a basic colour
 
@@ -46,6 +47,7 @@ int main() {
         
         mainWindow.Clear_Surf(testColour);
         mainWindow.Render_Line(testLine, player, testColour2);
+        mainWindow.Render_Player(player, testColour3);
     }
 
 

@@ -130,3 +130,22 @@ void Game_Window::Render_Line(Lineseg line, Player player, Uint32 colour) {
     // Call Draw_Line() to draw the line to screen
     this->Draw_Line(p1, p2, colour);
 }
+
+void Game_Window::Render_Player(Player player, Uint32 colour) {
+    Vec2 p1, p2, p3;
+    int winCenWid, winCenHt;
+    winCenWid = winWidth / 2;
+    winCenHt = winHeight / 2;
+
+    p1.x = winCenWid;
+    p1.y = winCenHt;
+
+    p2.x = winCenWid - 5;
+    p2.y = winCenHt + 5;
+
+    p3.x = winCenWid + 5;
+    p3.y = winCenHt + 5;
+
+    this->Draw_Line(p1, p2, colour);
+    this->Draw_Line(p1, p3, colour);
+}

@@ -1,4 +1,5 @@
 #include <SDL3/SDL_events.h>
+#include <math.h>
 #include <iostream>
 
 #include "Player.h"
@@ -19,9 +20,15 @@ bool Player::Handle_Input() {
     // get player input and make necesssary changed depending on what it is
 
     SDL_PumpEvents();
-
-    if (key_states[SDL_SCANCODE_W]) {pos.y -= velocity;}
-    if (key_states[SDL_SCANCODE_S]) {pos.y += velocity;}
+    // TODO: Change the movement direction to be relative to the rotation of the player
+    if (key_states[SDL_SCANCODE_W]) {
+        pos.y -= velocity * cos(rotation);
+        pos.x -= velocity * sin(rotation);
+    }
+    if (key_states[SDL_SCANCODE_S]) {
+        pos.y += velocity * cos(rotation);
+        pos.x += velocity * sin(rotation);
+    }
 
     if (key_states[SDL_SCANCODE_D]) {pos.x += velocity;}
     if (key_states[SDL_SCANCODE_A]) {pos.x -= velocity;}

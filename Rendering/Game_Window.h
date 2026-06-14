@@ -9,6 +9,7 @@
 #include "../Player/Player.h"
 
 using namespace std;
+using namespace player;
 
 namespace rendering {
 
@@ -34,7 +35,9 @@ class Game_Window {
     // rewrite them in a more cohesive manner when moving up to polygons
     void Draw_Line(Vec2 p1, Vec2 p2, Uint32 colour);
 
-    void Render_Line(Lineseg line, player::Player player, Uint32 colour);
+    void Render_Line(Lineseg line, Player player, Uint32 colour);
+
+    void Render_Player(Player player, Uint32 colour);
 
     void Clear_Surf(Uint32 colour);
 };
