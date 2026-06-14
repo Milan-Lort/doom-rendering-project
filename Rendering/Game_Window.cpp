@@ -119,11 +119,11 @@ void Game_Window::Render_Line(Lineseg line, Player player, Uint32 colour) {
     line.b.y = x2 * sin(rot) + y2 * cos(rot);
     // Convert to screenspace
     Vec2 p1, p2;
-    p1.x = (int)line.a.x - (winWidth / 2);
-    p1.y = (int)line.a.y - (winHeight /2);
+    p1.x = (int)line.a.x + (winWidth / 2);
+    p1.y = (int)line.a.y + (winHeight /2);
 
-    p2.x = (int)line.b.x - (winWidth / 2);
-    p2.y = (int)line.b.y - (winHeight / 2);
+    p2.x = (int)line.b.x + (winWidth / 2);
+    p2.y = (int)line.b.y + (winHeight / 2);
 
     cout<<"("<<p1.x<<","<<p1.y<<") ("<<p2.x<<","<<p2.y<<")"<<endl;
 

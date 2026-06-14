@@ -6,8 +6,8 @@
 using namespace player;
 
 Player::Player() {
-    pos.x = 0;
-    pos.y = 0;
+    pos.x = 400;
+    pos.y = 300;
 
     rotation = 0;
     rotSpeed = 0.002;
