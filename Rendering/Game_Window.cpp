@@ -170,47 +170,52 @@ void Game_Window::DDA_Render_Square(Square square, Player player, Uint32 colour)
     square.b.x = x2 * cos(rot) - y2 * sin(rot);
     square.b.y = x2 * sin(rot) + y2 * cos(rot);
 
-    // we now have the points converted, can get the distance and start messing with height/perspective
-    dist1 = sqrt(pow(square.a.x - player.Get_xPos(), 2) + pow(square.a.y - player.Get_yPos(),2));
-    dist2 = sqrt(pow(square.b.x - player.Get_xPos(), 2) + pow(square.b.y - player.Get_yPos(),2));
+    // okay as the distance increases the floor height gets closer to the center of the screen
+    int heightCenter = winHeight / 2;
+    int widthCenter = winWidth / 2;
 
-    float scrnHt1, scrnHt2, scrnWidth;
+    // remember now that all of the distances are in reference to the origin (the player)
+    // NOT the player's coordinates
 
-    if (dist1 >= 1) {scrnHt1 = square.h / dist1;}
-    else {scrnHt1 = winHeight;}
+    dist1 = sqrt(pow(square.a.x, 2) + pow(square.a.y, 2));
+    dist2 = sqrt(pow(square.b.x, 2) + pow(square.b.y, 2));
 
-    if (dist2 >= 1) {scrnHt2 = square.h / dist2;}
-    else {scrnHt2 = winHeight;}
+    float dDist = dist1 < dist2 ? dist2 - dist1 : dist1 - dist2;
+    float dist;
 
-    int dH;
-    if (scrnHt1 < scrnHt2) {dH = (int)(scrnHt2 - scrnHt1);}
-    else {dH = (int)(scrnHt1 - scrnHt2);}
+    // also remember that points are given to the screen in reference to the top left corner
 
     if (square.a.x < square.b.x) {
-        for (int x1 = (int)square.a.x; x1 <= (int)square.b.x; x1++) {
-            Vec2 a, b;
+        dist = dist1;
+        for (int x1 = (int)square.a.x; x1 <= square.b.x; x1++) {
+            Vec2 a,b;
+
+            float h = square.h / dist;
             a.x = x1;
             b.x = x1;
 
-            a.y = (winHeight / 2) - (scrnHt1 / 2);
-            b.y = (winHeight / 2) + (scrnHt1 / 2);
+            a.y = 0;
+            b.y = (int)h;
 
             this->Draw_Line(a, b, colour);
 
-            scrnHt1 -= dH / (square.b.x - square.a.x);
+            dist -= dDist;
         }
     } else {
-        for (int x1 = (int)square.b.x; x1 <= (int)square.a.x; x1++) {
-            Vec2 a, b;
+        dist = dist2;
+        for (int x1 = (int)square.b.x; x1 <= square.a.x; x1++) {
+            Vec2 a,b;
+
+            float h = square.h / dist;
             a.x = x1;
             b.x = x1;
 
-            a.y = (winHeight / 2) - (scrnHt2 / 2);
-            b.y = (winHeight / 2) + (scrnHt2 / 2);
+            a.y = 0;
+            b.y = (int)h;
 
             this->Draw_Line(a, b, colour);
 
-            scrnHt1 -= dH / (square.a.x - square.b.x);
+            dist -= dDist;
         }
     }
 }

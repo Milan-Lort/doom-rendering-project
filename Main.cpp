@@ -38,9 +38,9 @@ int main() {
 
     Lineseg testLine;
     testLine.a.x = 250;
-    testLine.a.y = 450;
-    testLine.b.x = 650;
-    testLine.b.y = 150;
+    testLine.a.y = 250;
+    testLine.b.x = 450;
+    testLine.b.y = 50;
 
     Square testSquare;
     testSquare.a = testLine.a;
@@ -57,8 +57,6 @@ int main() {
         mainWindow.Render_Player(player, testColour3);
     }
 
-
-    // SDL_Delay(5000);
     SDL_DestroyWindow(mainWindow.window); // TODO: Make a suitable destructor for the Game_Window class so I don't have to do this all the time
     SDL_Quit(); // 
     return 0;
