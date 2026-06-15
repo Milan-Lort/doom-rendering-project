@@ -30,8 +30,23 @@ bool Player::Handle_Input() {
         pos.x += velocity * sin(rotation);
     }
 
-    if (key_states[SDL_SCANCODE_D]) {pos.x += velocity;}
-    if (key_states[SDL_SCANCODE_A]) {pos.x -= velocity;}
+    if (key_states[SDL_SCANCODE_UP]) {
+        pos.y -= velocity * cos(rotation);
+        pos.x -= velocity * sin(rotation);
+    }
+    if (key_states[SDL_SCANCODE_DOWN]) {
+        pos.y += velocity * cos(rotation);
+        pos.x += velocity * sin(rotation);
+    }
+
+    if (key_states[SDL_SCANCODE_D]) {
+        pos.x -= velocity * cos(rotation);
+        pos.y -= velocity * sin(rotation);
+    }
+    if (key_states[SDL_SCANCODE_A]) {
+        pos.x += velocity * cos(rotation);
+        pos.y += velocity * sin(rotation);
+    }
 
     if (key_states[SDL_SCANCODE_RIGHT]) {rotation -= rotSpeed;}
     if (key_states[SDL_SCANCODE_LEFT]) {rotation += rotSpeed;}
