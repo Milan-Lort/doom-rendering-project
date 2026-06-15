@@ -37,21 +37,28 @@ int main() {
     mainWindow.Draw_Rectangle(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, testColour); // set the window to a basic colour
 
     Lineseg testLine;
-    testLine.a.x = 0;
-    testLine.a.y = 0;
-    testLine.b.x = 50;
-    testLine.b.y = 50;
+    testLine.a.x = 250;
+    testLine.a.y = 450;
+    testLine.b.x = 650;
+    testLine.b.y = 150;
+
+    Square testSquare;
+    testSquare.a = testLine.a;
+    testSquare.b = testLine.b;
+    testSquare.h = 150;
     
     while(running) {
+        // TODO: Implement time delta
         running = player.Handle_Input();
         
         mainWindow.Clear_Surf(testColour);
-        mainWindow.Render_Line(testLine, player, testColour2);
+        // mainWindow.Render_Line(testLine, player, testColour2);
+        mainWindow.DDA_Render_Square(testSquare, player, testColour2);
         mainWindow.Render_Player(player, testColour3);
     }
 
 
-    SDL_Delay(5000);
+    // SDL_Delay(5000);
     SDL_DestroyWindow(mainWindow.window); // TODO: Make a suitable destructor for the Game_Window class so I don't have to do this all the time
     SDL_Quit(); // 
     return 0;

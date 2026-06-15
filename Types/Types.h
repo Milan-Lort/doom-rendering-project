@@ -18,4 +18,12 @@ typedef struct Lineseg {
     FltVec2 a, b;
 } Lineseg;
 
+typedef struct Square {
+    /*
+        a, b define points on the ground, h defines the height of the square
+    */
+    FltVec2 a, b;
+    float h;
+} Square;
+
 #endif

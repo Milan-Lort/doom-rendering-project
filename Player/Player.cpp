@@ -13,7 +13,7 @@ Player::Player() {
     rotation = 0;
     rotSpeed = 0.002;
 
-    velocity = 0.1;
+    velocity = 0.3;
 }
 
 bool Player::Handle_Input() {

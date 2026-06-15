@@ -39,6 +39,8 @@ class Game_Window {
 
     void Render_Player(Player player, Uint32 colour);
 
+    void DDA_Render_Square(Square square, Player player, Uint32 colour);
+
     void Clear_Surf(Uint32 colour);
 };
 

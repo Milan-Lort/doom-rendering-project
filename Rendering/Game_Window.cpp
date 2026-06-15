@@ -125,7 +125,7 @@ void Game_Window::Render_Line(Lineseg line, Player player, Uint32 colour) {
     p2.x = (int)line.b.x + (winWidth / 2);
     p2.y = (int)line.b.y + (winHeight / 2);
 
-    cout<<"("<<p1.x<<","<<p1.y<<") ("<<p2.x<<","<<p2.y<<")"<<endl;
+    // cout<<"("<<p1.x<<","<<p1.y<<") ("<<p2.x<<","<<p2.y<<")"<<endl;
 
     // Call Draw_Line() to draw the line to screen
     this->Draw_Line(p1, p2, colour);
@@ -148,4 +148,69 @@ void Game_Window::Render_Player(Player player, Uint32 colour) {
 
     this->Draw_Line(p1, p2, colour);
     this->Draw_Line(p1, p3, colour);
+}
+
+void Game_Window::DDA_Render_Square(Square square, Player player, Uint32 colour) {
+    // TODO: implement a DDA approximation for rendering a square. just use a vertical line render for now using Draw_Line()
+
+    float x1, x2, y1, y2, dist1, dist2;
+    square.a.x -= player.Get_xPos();
+    square.a.y -= player.Get_yPos();
+    square.b.x -= player.Get_xPos();
+    square.b.y -= player.Get_yPos();
+
+    float rot = player.Get_Rot();
+    x1 = square.a.x;
+    x2 = square.b.x;
+    y1 = square.a.y;
+    y2 = square.b.y;
+
+    square.a.x = x1 * cos(rot) - y1 * sin(rot);
+    square.a.y = x1 * sin(rot) + y1 * cos(rot);
+    square.b.x = x2 * cos(rot) - y2 * sin(rot);
+    square.b.y = x2 * sin(rot) + y2 * cos(rot);
+
+    // we now have the points converted, can get the distance and start messing with height/perspective
+    dist1 = sqrt(pow(square.a.x - player.Get_xPos(), 2) + pow(square.a.y - player.Get_yPos(),2));
+    dist2 = sqrt(pow(square.b.x - player.Get_xPos(), 2) + pow(square.b.y - player.Get_yPos(),2));
+
+    float scrnHt1, scrnHt2, scrnWidth;
+
+    if (dist1 >= 1) {scrnHt1 = square.h / dist1;}
+    else {scrnHt1 = winHeight;}
+
+    if (dist2 >= 1) {scrnHt2 = square.h / dist2;}
+    else {scrnHt2 = winHeight;}
+
+    int dH;
+    if (scrnHt1 < scrnHt2) {dH = (int)(scrnHt2 - scrnHt1);}
+    else {dH = (int)(scrnHt1 - scrnHt2);}
+
+    if (square.a.x < square.b.x) {
+        for (int x1 = (int)square.a.x; x1 <= (int)square.b.x; x1++) {
+            Vec2 a, b;
+            a.x = x1;
+            b.x = x1;
+
+            a.y = (winHeight / 2) - (scrnHt1 / 2);
+            b.y = (winHeight / 2) + (scrnHt1 / 2);
+
+            this->Draw_Line(a, b, colour);
+
+            scrnHt1 -= dH / (square.b.x - square.a.x);
+        }
+    } else {
+        for (int x1 = (int)square.b.x; x1 <= (int)square.a.x; x1++) {
+            Vec2 a, b;
+            a.x = x1;
+            b.x = x1;
+
+            a.y = (winHeight / 2) - (scrnHt2 / 2);
+            b.y = (winHeight / 2) + (scrnHt2 / 2);
+
+            this->Draw_Line(a, b, colour);
+
+            scrnHt1 -= dH / (square.a.x - square.b.x);
+        }
+    }
 }
