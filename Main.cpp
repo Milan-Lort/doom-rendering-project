@@ -22,6 +22,7 @@ int main() {
 
     // create a window
     Game_Window mainWindow("Main Window", SCREEN_WIDTH, SCREEN_HEIGHT);
+    Game_Window debugWindow("Debug", SCREEN_WIDTH, SCREEN_HEIGHT);
     
     // create a player
     Player player;
@@ -45,16 +46,22 @@ int main() {
     Square testSquare;
     testSquare.a = testLine.a;
     testSquare.b = testLine.b;
-    testSquare.h = 150;
+    testSquare.h = 50;
     
     while(running) {
         // TODO: Implement time delta
         running = player.Handle_Input();
         
         mainWindow.Clear_Surf(testColour);
-        // mainWindow.Render_Line(testLine, player, testColour2);
         mainWindow.DDA_Render_Square(testSquare, player, testColour2);
         mainWindow.Render_Player(player, testColour3);
+
+        debugWindow.Clear_Surf(testColour);
+        debugWindow.Render_Line(testLine, player, testColour2);
+        debugWindow.Render_Player(player, testColour3);
+
+        debugWindow.Update_Window();
+        mainWindow.Update_Window();
     }
 
     SDL_DestroyWindow(mainWindow.window); // TODO: Make a suitable destructor for the Game_Window class so I don't have to do this all the time

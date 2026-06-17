@@ -178,8 +178,8 @@ void Game_Window::DDA_Render_Square(Square square, Player player, Uint32 colour)
     float scrnCentW = winWidth / 2;
     float heightRatio = (winHeight * winWidth) / 60;
 
-    x1 = distX1 * scrnCentW / distY1;
-    x2 = distX2 * scrnCentW / distY2;
+    x1 = -distX1 * scrnCentW / distY1;
+    x2 = -distX2 * scrnCentW / distY2;
     float y1a = (square.h - heightRatio) / distY1;
     float y2a = (square.h - heightRatio) / distY2;
     float y1b = heightRatio / distY1;
@@ -187,13 +187,13 @@ void Game_Window::DDA_Render_Square(Square square, Player player, Uint32 colour)
     
 
     Vec2 p1, p2, p3, p4;
-    p1.x = scrnCentW - distX1;
+    p1.x = scrnCentW + distX1;
     p1.y = scrnCentH + y1a;
-    p2.x = scrnCentW - distX2;
+    p2.x = scrnCentW + distX2;
     p2.y = scrnCentH + y2a;
-    p3.x = scrnCentW - distX1;
+    p3.x = scrnCentW + distX1;
     p3.y = scrnCentH + y1b;
-    p4.x = scrnCentW - distX2;
+    p4.x = scrnCentW + distX2;
     p4.y = scrnCentW + y2b;
 
     this->Draw_Line(p1, p2, colour);
@@ -202,7 +202,9 @@ void Game_Window::DDA_Render_Square(Square square, Player player, Uint32 colour)
     this->Draw_Line(p4, p1, colour);
     this->Draw_Line(p1, p3, colour);
     this->Draw_Line(p2, p4, colour);
+}
 
+void Game_Window::Update_Window() {
     SDL_BlitSurface(surf, NULL, winSurf, NULL);
     SDL_UpdateWindowSurface(window);
 }

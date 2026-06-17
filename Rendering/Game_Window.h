@@ -41,6 +41,8 @@ class Game_Window {
 
     void DDA_Render_Square(Square square, Player player, Uint32 colour);
 
+    void Update_Window();
+
     void Clear_Surf(Uint32 colour);
 };
 
