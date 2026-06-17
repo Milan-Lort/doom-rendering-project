@@ -11,9 +11,9 @@ Player::Player() {
     pos.y = 300;
 
     rotation = 0;
-    rotSpeed = 0.002;
+    rotSpeed = 0.01;
 
-    velocity = 0.3;
+    velocity = 0.6;
 }
 
 bool Player::Handle_Input() {
