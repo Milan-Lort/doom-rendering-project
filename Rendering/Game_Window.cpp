@@ -94,9 +94,6 @@ void Game_Window::Draw_Line(Vec2 p1, Vec2 p2, Uint32 colour) {
             p1.y += dirY;
         }
     }
-
-    SDL_BlitSurface(surf, NULL, winSurf, NULL);
-    SDL_UpdateWindowSurface(window);
 }
 
 void Game_Window::Render_Line(Lineseg line, Player player, Uint32 colour) {
@@ -170,52 +167,42 @@ void Game_Window::DDA_Render_Square(Square square, Player player, Uint32 colour)
     square.b.x = x2 * cos(rot) - y2 * sin(rot);
     square.b.y = x2 * sin(rot) + y2 * cos(rot);
 
-    // okay as the distance increases the floor height gets closer to the center of the screen
-    int heightCenter = winHeight / 2;
-    int widthCenter = winWidth / 2;
+    // Everything now needs to be computed in reference to the origin (the player) not the player's coordinates
+    float distY1, distY2, distX1, distX2;
+    distY1 = square.a.y;
+    distY2 = square.b.y;
+    distX1 = square.a.x;
+    distX2 = square.b.x;
 
-    // remember now that all of the distances are in reference to the origin (the player)
-    // NOT the player's coordinates
+    float scrnCentH = winHeight / 2;
+    float scrnCentW = winWidth / 2;
+    float heightRatio = (winHeight * winWidth) / 60;
 
-    dist1 = sqrt(pow(square.a.x, 2) + pow(square.a.y, 2));
-    dist2 = sqrt(pow(square.b.x, 2) + pow(square.b.y, 2));
+    x1 = distX1 * scrnCentW / distY1;
+    x2 = distX2 * scrnCentW / distY2;
+    float y1a = (square.h - heightRatio) / distY1;
+    float y2a = (square.h - heightRatio) / distY2;
+    float y1b = heightRatio / distY1;
+    float y2b = heightRatio / distY2;
+    
 
-    float dDist = dist1 < dist2 ? dist2 - dist1 : dist1 - dist2;
-    float dist;
+    Vec2 p1, p2, p3, p4;
+    p1.x = scrnCentW - distX1;
+    p1.y = scrnCentH + y1a;
+    p2.x = scrnCentW - distX2;
+    p2.y = scrnCentH + y2a;
+    p3.x = scrnCentW - distX1;
+    p3.y = scrnCentH + y1b;
+    p4.x = scrnCentW - distX2;
+    p4.y = scrnCentW + y2b;
 
-    // also remember that points are given to the screen in reference to the top left corner
+    this->Draw_Line(p1, p2, colour);
+    this->Draw_Line(p2, p3, colour);
+    this->Draw_Line(p3, p4, colour);
+    this->Draw_Line(p4, p1, colour);
+    this->Draw_Line(p1, p3, colour);
+    this->Draw_Line(p2, p4, colour);
 
-    if (square.a.x < square.b.x) {
-        dist = dist1;
-        for (int x1 = (int)square.a.x; x1 <= square.b.x; x1++) {
-            Vec2 a,b;
-
-            float h = square.h / dist;
-            a.x = x1;
-            b.x = x1;
-
-            a.y = 0;
-            b.y = (int)h;
-
-            this->Draw_Line(a, b, colour);
-
-            dist -= dDist;
-        }
-    } else {
-        dist = dist2;
-        for (int x1 = (int)square.b.x; x1 <= square.a.x; x1++) {
-            Vec2 a,b;
-
-            float h = square.h / dist;
-            a.x = x1;
-            b.x = x1;
-
-            a.y = 0;
-            b.y = (int)h;
-
-            this->Draw_Line(a, b, colour);
-
-            dist -= dDist;
-        }
-    }
+    SDL_BlitSurface(surf, NULL, winSurf, NULL);
+    SDL_UpdateWindowSurface(window);
 }
