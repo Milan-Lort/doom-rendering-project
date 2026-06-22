@@ -3,9 +3,9 @@
 #include <SDL3/SDL_events.h>
 #include <iostream>
 
-#include "Rendering/Game_Window.h"
-#include "Player/Player.h"
-#include "Types/Types.h"
+#include "./headers/Game_Window.h"
+#include "./headers/Player.h"
+#include "./headers/Types.h"
 
 #define SCREEN_WIDTH 800
 #define SCREEN_HEIGHT 600

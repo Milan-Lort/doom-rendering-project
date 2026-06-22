@@ -2,10 +2,7 @@
 #include <iostream>
 #include <math.h>
 
-#include "Game_Window.h"
-
-#include "../Types/Types.h"
-#include "../Player/Player.h"
+#include "./headers/Game_Window.h"
 
 using namespace std;
 using namespace rendering;

@@ -2,7 +2,7 @@
 #include <math.h>
 #include <iostream>
 
-#include "Player.h"
+#include "./headers/Player.h"
 
 using namespace player;
 

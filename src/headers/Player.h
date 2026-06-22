@@ -3,7 +3,7 @@
 
 #include <SDL3/SDL_keyboard.h>
 
-#include "../Types/Types.h"
+#include "Types.h"
 
 namespace player {
     // go over all of this later after seeing how others deal with some of these things

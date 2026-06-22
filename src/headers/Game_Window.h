@@ -5,8 +5,8 @@
 #include <SDL3/SDL_main.h>
 #include <string>
 
-#include "../Types/Types.h"
-#include "../Player/Player.h"
+#include "Types.h"
+#include "Player.h"
 
 using namespace std;
 using namespace player;

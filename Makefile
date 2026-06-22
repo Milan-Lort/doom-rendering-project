@@ -1,5 +1,5 @@
 all:
-	g++ Main.cpp ./Rendering/Game_Window.cpp ./Player/Player.cpp -o ./Output/DoomLike -lSDL3
+	g++ ./src/Main.cpp ./src/Game_Window.cpp ./src/Player.cpp -o ./Output/DoomLike -lSDL3
 
 clean:
 	rm ./Output/DoomLike
