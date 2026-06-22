@@ -173,17 +173,17 @@ void Game_Window::DDA_Render_Square(Square square, Player player, Uint32 colour)
     x2 = -distX2 * scrnCentW / distY2;
     float y1a = -(square.h + heightRatio) / distY1;
     float y2a = -(square.h + heightRatio) / distY2;
-    float y1b = heightRatio / distY1;
-    float y2b = heightRatio / distY2;
+    float y1b = (heightRatio) / distY1;
+    float y2b = (heightRatio) / distY2;
 
     Vec2 p1, p2, p3, p4;
-    p1.x = scrnCentW + distX1;
+    p1.x = scrnCentW + x1;
     p1.y = scrnCentH + y1a;
-    p2.x = scrnCentW + distX2;
+    p2.x = scrnCentW + x2;
     p2.y = scrnCentH + y2a;
-    p3.x = scrnCentW + distX2;
+    p3.x = scrnCentW + x2;
     p3.y = scrnCentW + y2b;
-    p4.x = scrnCentW + distX1;
+    p4.x = scrnCentW + x1;
     p4.y = scrnCentH + y1b;
 
     this->Draw_Line(p1, p2, colour);

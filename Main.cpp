@@ -40,8 +40,8 @@ int main() {
     Lineseg testLine;
     testLine.a.x = 250;
     testLine.a.y = 250;
-    testLine.b.x = 350;
-    testLine.b.y = 50;
+    testLine.b.x = 275;
+    testLine.b.y = 275;
 
     Square testSquare;
     testSquare.a = testLine.a;

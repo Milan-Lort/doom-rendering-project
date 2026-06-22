@@ -39,13 +39,14 @@ bool Player::Handle_Input() {
         pos.x += velocity * sin(rotation);
     }
 
+    // TODO: Fix strafing
     if (key_states[SDL_SCANCODE_D]) {
-        pos.x -= velocity * cos(rotation);
         pos.y -= velocity * sin(rotation);
+        pos.x -= velocity * cos(rotation);
     }
     if (key_states[SDL_SCANCODE_A]) {
-        pos.x += velocity * cos(rotation);
         pos.y += velocity * sin(rotation);
+        pos.x += velocity * cos(rotation);
     }
 
     if (key_states[SDL_SCANCODE_RIGHT]) {rotation -= rotSpeed;}
