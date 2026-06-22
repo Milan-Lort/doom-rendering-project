@@ -1,6 +1,9 @@
 #ifndef TYPES_H
 #define TYPES_H
 
+#define SCREEN_WIDTH 800
+#define SCREEN_HEIGHT 600
+
 typedef struct Vec2 {
     int x,y;
 } Vec2;

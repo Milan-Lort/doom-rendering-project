@@ -6,7 +6,7 @@
 #include "Types.h"
 
 namespace player {
-    // go over all of this later after seeing how others deal with some of these things
+    // use this class to store player information not used for rendering and perform player actions (again not used for rendering)
     class Player {
         private:
         // Position should be arbitrary world space not screen space

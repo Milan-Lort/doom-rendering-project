@@ -7,9 +7,6 @@
 #include "./headers/Player.h"
 #include "./headers/Types.h"
 
-#define SCREEN_WIDTH 800
-#define SCREEN_HEIGHT 600
-
 using namespace rendering;
 using namespace player;
 
