@@ -2,18 +2,24 @@
 #define GAME_H
 
 #include <SDL3/SDL.h>
+#include <string>
 
 #include "Game_Window.h"
+#include "Camera.h"
 #include "Player.h"
 #include "Types.h"
+#include "Level.h"
 
 using namespace rendering;
 using namespace player;
+using namespace level;
 
 class Game {
     private:
     Game_Window mainWindow;
     Player player;
+    Level currLevel;
+    Camera camera;
     SDL_Surface* drawSurf;
 
     float deltaTime;
@@ -30,7 +36,7 @@ class Game {
 
     Game();
 
-    void Load_Level(const char* filename);
+    void Select_Level();
 
     void Play_Game(); // use this to run the game loop
 };

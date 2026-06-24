@@ -19,15 +19,15 @@ class Camera {
     SDL_Surface* drawSurf;
     public:
 
-    Camera(SDL_Surface* drawSurf);
+    Camera(SDL_Surface* surf);
 
-    float Get_xPos();
+    void Handle_Movement(float deltaTime);
 
-    float Get_yPos();
-    
-    float Get_Rot();
+    void Set_Px(Vec2 p, Uint32 colour);
 
-    void Handle_Movement();
+    void Render_Line(Vec2 p1, Vec2 p2, Uint32 colour);
+
+    void Wireframe_Render_Wall(Wall wall, Uint32 colour);
 };
 
 }

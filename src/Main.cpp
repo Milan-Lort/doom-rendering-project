@@ -40,7 +40,7 @@ int main() {
     testLine.b.x = 275;
     testLine.b.y = 275;
 
-    Square testSquare;
+    Wall testSquare;
     testSquare.a = testLine.a;
     testSquare.b = testLine.b;
     testSquare.h = 50;

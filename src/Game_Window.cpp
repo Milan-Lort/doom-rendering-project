@@ -144,7 +144,7 @@ void Game_Window::Render_Player(Player player, Uint32 colour) {
     this->Draw_Line(p1, p3, colour);
 }
 
-void Game_Window::DDA_Render_Square(Square square, Player player, Uint32 colour) {
+void Game_Window::DDA_Render_Square(Wall square, Player player, Uint32 colour) {
     // TODO: implement a DDA approximation for rendering a square. just use a vertical line render for now using Draw_Line()
 
     float x1, x2, y1, y2;
