@@ -10,10 +10,13 @@ namespace rendering {
 class Camera {
     private:
     FltVec2 pos;
+    Uint32 black;
         
     float velocity;
     float rotation;
     float rotSpeed;
+
+    float strafeRotOff;
     
     const bool *key_states = SDL_GetKeyboardState(NULL);
     SDL_Surface* drawSurf;
@@ -22,6 +25,8 @@ class Camera {
     Camera(SDL_Surface* surf);
 
     void Handle_Movement(float deltaTime);
+
+    void Clear_Screen();
 
     void Set_Px(Vec2 p, Uint32 colour);
 

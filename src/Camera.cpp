@@ -12,9 +12,13 @@ Camera::Camera(SDL_Surface* surf) {
     pos.y = 300;
 
     rotation = 0;
-    rotSpeed = 0.01;
+    rotSpeed = 2.5;
 
-    velocity = 0.4;
+    velocity = 20;
+
+    black = SDL_MapRGBA(SDL_GetPixelFormatDetails(SDL_PIXELFORMAT_ARGB32), NULL, 0, 0, 0, 100);
+
+    strafeRotOff = M_PI / 4;
 }
 
 void Camera::Handle_Movement(float deltaTime) {
@@ -42,16 +46,28 @@ void Camera::Handle_Movement(float deltaTime) {
 
     // TODO: Fix strafing
     if (key_states[SDL_SCANCODE_D]) {
-        pos.y -= velocity * sin(rotation) * deltaTime;
-        pos.x -= velocity * cos(rotation) * deltaTime;
+        pos.y -= velocity * cos(rotation - strafeRotOff) * deltaTime;
+        pos.x -= velocity * sin(rotation - strafeRotOff) * deltaTime;
     }
     if (key_states[SDL_SCANCODE_A]) {
-        pos.y += velocity * sin(rotation) * deltaTime;
-        pos.x += velocity * cos(rotation) * deltaTime;
+        pos.y += velocity * cos(rotation - strafeRotOff) * deltaTime;
+        pos.x += velocity * sin(rotation - strafeRotOff) * deltaTime;
     }
 
     if (key_states[SDL_SCANCODE_RIGHT]) {rotation -= rotSpeed * deltaTime;}
     if (key_states[SDL_SCANCODE_LEFT]) {rotation += rotSpeed * deltaTime;}
+}
+
+void Camera::Clear_Screen() {
+    int bytes = sizeof(Uint32);
+    Uint8* startPx = ((Uint8*)drawSurf->pixels);
+
+    for (int y = 0; y < SCREEN_HEIGHT; y++) {
+        for (int x = 0; x < SCREEN_WIDTH; x++) {
+            Uint32* pixel = (Uint32*)(startPx + (y * drawSurf->pitch) + (x * bytes));
+            *pixel = black;
+        }
+    }
 }
 
 void Camera::Set_Px(Vec2 p, Uint32 colour) {

@@ -18,6 +18,7 @@ namespace rendering {
     
 class Game {
     private:
+    Uint64 frameCount;
     SDL_Surface* drawSurf = SDL_CreateSurface(SCREEN_WIDTH, SCREEN_HEIGHT, SDL_PIXELFORMAT_ARGB32);
     Player player = Player();
     Level currLevel = Level("examplelvl.txt");
