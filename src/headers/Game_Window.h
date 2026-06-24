@@ -27,7 +27,7 @@ class Game_Window {
     public:
     SDL_Window* window;
 
-    Game_Window(const char* title, int width, int height);
+    Game_Window(const char* title, int width, int height, SDL_Surface* drawSurf);
 
     void Draw_Rectangle(int x1, int y1, int x2, int y2, Uint32 colour);
 

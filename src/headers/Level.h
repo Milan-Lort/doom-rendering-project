@@ -17,7 +17,7 @@ class Level {
 
     public:
 
-    void Load_Level(string filename);
+    Level(string filename);
 };
 
 }

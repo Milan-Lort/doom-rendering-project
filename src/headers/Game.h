@@ -14,13 +14,15 @@ using namespace rendering;
 using namespace player;
 using namespace level;
 
+namespace rendering {
+    
 class Game {
     private:
-    Game_Window mainWindow;
-    Player player;
-    Level currLevel;
-    Camera camera;
-    SDL_Surface* drawSurf;
+    SDL_Surface* drawSurf = SDL_CreateSurface(SCREEN_WIDTH, SCREEN_HEIGHT, SDL_PIXELFORMAT_ARGB32);
+    Player player = Player();
+    Level currLevel = Level("examplelvl.txt");
+    Camera camera = Camera(drawSurf);
+    Game_Window mainWindow = Game_Window("Main Window", SCREEN_WIDTH, SCREEN_HEIGHT, drawSurf);
 
     float deltaTime;
     
@@ -40,5 +42,8 @@ class Game {
 
     void Play_Game(); // use this to run the game loop
 };
+
+}
+
 
 #endif

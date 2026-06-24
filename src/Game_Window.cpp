@@ -8,13 +8,13 @@ using namespace std;
 using namespace rendering;
 using namespace player;
 
-Game_Window::Game_Window(const char* title, int width, int height) {
+Game_Window::Game_Window(const char* title, int width, int height, SDL_Surface* drawSurf) {
     // define the function
     winWidth = width;
     winHeight= height;
     window = SDL_CreateWindow(title, width, height, 0);
     // add errror handling later
-    surf = SDL_CreateSurface(width, height, SDL_PIXELFORMAT_ARGB32);
+    surf = drawSurf;
     winSurf = SDL_GetWindowSurface(window);
 }
 
