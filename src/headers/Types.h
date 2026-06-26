@@ -3,7 +3,7 @@
 
 #define SCREEN_WIDTH 800
 #define SCREEN_HEIGHT 600
-#define RENDER_FPS 60
+#define LOGIC_UPDATE_TIME 1000 / 6000
 
 typedef struct Vec2 {
     int x,y;

@@ -1,4 +1,5 @@
 #include <SDL3/SDL.h>
+#include <iostream>
 
 #include "./headers/Game.h"
 
@@ -6,21 +7,44 @@ using namespace rendering;
 
 Game::Game() {
     float deltaTime = 0;
-    frameCount = 0;
 }
 
 void Game::Play_Game() {
+    // Uint64s used to track game timing
     Uint64 now, last;
+    Uint64 lastUpdate = SDL_GetPerformanceCounter();
     now = SDL_GetPerformanceCounter();
     last = 0;
-    while (true) {
+
+    // event is used to tell when to quit the game
+    SDL_Event event;
+
+    /*
+        Game Loop checks to see if game should quick due to window closure
+        Then timing is updated and rendering and logic updates can be called
+        Logic does not update every frame, but rather as a fixed duration
+        In final version logic updates for physics etc should probably be differentiated from movement
+        Movement should then be left to update every frame
+        For now keep as is
+    */
+    bool running = true;
+    while (running) {
+        while (SDL_PollEvent(&event)) {
+            if (event.type == SDL_EVENT_QUIT) {
+                running = false;
+            }
+        }
         frameCount++;
         last = now;
         now = SDL_GetPerformanceCounter();
         deltaTime = (now - last) / (float)SDL_GetPerformanceFrequency();
 
-        this->Update_Logic();
-        if (frameCount % 5 == 0) {this->Update_Render();}
+        if ((now - lastUpdate) / (float)SDL_GetPerformanceFrequency() >= LOGIC_UPDATE_TIME) {
+            lastUpdate = now;
+            this->Update_Logic();
+        }
+
+        this->Update_Render();
     }
 }
 

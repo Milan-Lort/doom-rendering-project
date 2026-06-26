@@ -46,12 +46,12 @@ void Camera::Handle_Movement(float deltaTime) {
 
     // TODO: Fix strafing
     if (key_states[SDL_SCANCODE_D]) {
-        pos.y -= velocity * cos(rotation - strafeRotOff) * deltaTime;
-        pos.x -= velocity * sin(rotation - strafeRotOff) * deltaTime;
+        pos.x -= velocity * cos(rotation) * deltaTime;
+        pos.y -= velocity * sin(rotation) * deltaTime;
     }
     if (key_states[SDL_SCANCODE_A]) {
-        pos.y += velocity * cos(rotation - strafeRotOff) * deltaTime;
-        pos.x += velocity * sin(rotation - strafeRotOff) * deltaTime;
+        pos.x += velocity * cos(rotation) * deltaTime;
+        pos.y += velocity * sin(rotation) * deltaTime;
     }
 
     if (key_states[SDL_SCANCODE_RIGHT]) {rotation -= rotSpeed * deltaTime;}
