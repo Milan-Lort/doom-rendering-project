@@ -1,1 +1,4 @@
-# Use this to make an example for loading level data
+# use this to denote a comment
+# format is ax ay bx by h
+250 250 275 275 50
+275 275 300 275 50

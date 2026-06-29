@@ -7,6 +7,7 @@ using namespace rendering;
 
 Game::Game() {
     float deltaTime = 0;
+    levelGeometry = currLevel.getLevelGeometry();
 }
 
 void Game::Play_Game() {
@@ -53,23 +54,16 @@ void Game::Update_Logic() {
 }
 
 void Game::Update_Render() {
+    camera.Clear_Screen();
     // go through all walls in the level and draw them to the screen
     // do culling within the camera class
     Uint32 testColour2 = SDL_MapRGBA(SDL_GetPixelFormatDetails(SDL_PIXELFORMAT_ARGB32), NULL, 0, 0, 255, 100);
     Uint32 testColour3 = SDL_MapRGBA(SDL_GetPixelFormatDetails(SDL_PIXELFORMAT_ARGB32), NULL, 255, 0, 0, 100);
-    Lineseg testLine;
-    testLine.a.x = 250;
-    testLine.a.y = 250;
-    testLine.b.x = 275;
-    testLine.b.y = 275;
 
-    Wall testSquare;
-    testSquare.a = testLine.a;
-    testSquare.b = testLine.b;
-    testSquare.h = 50;
 
-    camera.Clear_Screen();
-    camera.Wireframe_Render_Wall(testSquare, testColour2);
+    for (int i = 0; i < levelGeometry.size(); i++) {
+        camera.Wireframe_Render_Wall(levelGeometry[i], testColour2);
+    }
 
     mainWindow.Update_Window();
 }

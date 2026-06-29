@@ -18,6 +18,8 @@ class Level {
     public:
 
     Level(string filename);
+
+    vector<Wall> getLevelGeometry();
 };
 
 }
