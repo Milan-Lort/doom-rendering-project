@@ -4,7 +4,7 @@ CXX := g++
 LIBFLAGS := -lSDL3
 
 SRC_DIRS := ./src
-BUILD_DIRS := ./Output
+BUILD_DIRS := ./Build
 INC_DIRS := ./src/headers
 
 # Gets the names of all c++ files in the source directory
@@ -19,7 +19,6 @@ $(BUILD_DIRS)/$(TARGET_EXEC): $(OBJS)
 $(BUILD_DIRS)/%.cpp.o: %.cpp
 	@mkdir -p $(dir $@)
 	$(CXX) -c $< -o $@
-
 
 .PHONY: clean
 clean:
